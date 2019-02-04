@@ -36,7 +36,7 @@ func UTCNow() time.Time {
 	return time.Now().UTC()
 }
 
-func ParseRequest(c *gin.Context, sp *SearchParams, op *OutputParams) {
+func ParseRequest(c *gin.Context, sp *searchParams, op *outputParams) {
 	err := c.ShouldBindQuery(sp)
 	if err != nil {
 		c.Error(err)
@@ -65,7 +65,7 @@ func ParseRequest(c *gin.Context, sp *SearchParams, op *OutputParams) {
 	op.SelfLink = SiteURL + c.Request.URL.String()
 }
 
-func Generate(c *gin.Context, sp *SearchParams, op *OutputParams) {
+func Generate(c *gin.Context, sp *searchParams, op *outputParams) {
 	if op.Format == "" {
 		op.Format = "rss"
 	}

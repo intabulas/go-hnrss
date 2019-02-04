@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HiringCommon(c *gin.Context, query string) {
+func fetchHiring(c *gin.Context, query string) {
 	params := make(url.Values)
 	if query != "" {
 		params.Set("query", fmt.Sprintf("\"%s\"", query))
@@ -32,8 +32,8 @@ func HiringCommon(c *gin.Context, query string) {
 		return
 	}
 
-	var sp SearchParams
-	var op OutputParams
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "comment"
@@ -48,23 +48,27 @@ func HiringCommon(c *gin.Context, query string) {
 	}
 	sp.SearchAttributes = "default"
 	op.Title = results.Hits[0].Title
-	op.Link = "https://news.ycombinator.com/item?id=" + results.Hits[0].ObjectID
+	op.Link = hackerNewsItemID + results.Hits[0].ObjectID
 
 	Generate(c, &sp, &op)
 }
 
-func SeekingEmployees(c *gin.Context) {
-	HiringCommon(c, "Ask HN: Who is hiring?")
+// seekingEmployeesHandler ...
+func seekingEmployeesHandler(c *gin.Context) {
+	fetchHiring(c, "Ask HN: Who is hiring?")
 }
 
-func SeekingEmployers(c *gin.Context) {
-	HiringCommon(c, "Ask HN: Who wants to be hired?")
+// seekingEmployersHandler
+func seekingEmployersHandler(c *gin.Context) {
+	fetchHiring(c, "Ask HN: Who wants to be hired?")
 }
 
-func SeekingFreelance(c *gin.Context) {
-	HiringCommon(c, "Ask HN: Freelancer? Seeking freelancer?")
+// seekingFreelanceHandler
+func seekingFreelanceHandler(c *gin.Context) {
+	fetchHiring(c, "Ask HN: Freelancer? Seeking freelancer?")
 }
 
-func SeekingAll(c *gin.Context) {
-	HiringCommon(c, "")
+// seekingAllHandler
+func seekingAllHandler(c *gin.Context) {
+	fetchHiring(c, "")
 }

@@ -11,7 +11,7 @@ const (
 	HitsPerPageLimit = 100
 )
 
-type OutputParams struct {
+type outputParams struct {
 	Title       string
 	Link        string
 	Description string `form:"description"`
@@ -20,7 +20,7 @@ type OutputParams struct {
 	SelfLink    string
 }
 
-type SearchParams struct {
+type searchParams struct {
 	Tags             string
 	Query            string `form:"q"`
 	OptionalWords    string
@@ -32,7 +32,7 @@ type SearchParams struct {
 	Count            string `form:"count"`
 }
 
-func (sp *SearchParams) numericFilters() string {
+func (sp *searchParams) numericFilters() string {
 	var filters []string
 	if sp.Points != "" {
 		filters = append(filters, "points>="+sp.Points)
@@ -44,7 +44,7 @@ func (sp *SearchParams) numericFilters() string {
 }
 
 // Encode transforms the search options into an Algolia search querystring
-func (sp *SearchParams) Values() url.Values {
+func (sp *searchParams) Values() url.Values {
 	params := make(url.Values)
 
 	if sp.OptionalWords != "" {

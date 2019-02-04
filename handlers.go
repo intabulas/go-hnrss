@@ -10,9 +10,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Newest(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// newestPostHandler ..
+func newestPostHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "(story,poll)"
@@ -26,9 +27,10 @@ func Newest(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Frontpage(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// frontpageHandler
+func frontpageHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "front_page"
@@ -42,9 +44,10 @@ func Frontpage(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Newcomments(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// newCommentsHandler
+func newCommentsHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "comment"
@@ -59,9 +62,10 @@ func Newcomments(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func AskHN(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// askHNHandler
+func askHNHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "ask_hn"
@@ -75,9 +79,10 @@ func AskHN(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func ShowHN(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// showHNHandler
+func showHNHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "show_hn"
@@ -91,9 +96,10 @@ func ShowHN(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Polls(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// pollsHandler
+func pollsHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "poll"
@@ -107,9 +113,10 @@ func Polls(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Jobs(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// jobsHandler
+func jobsHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "job"
@@ -123,9 +130,10 @@ func Jobs(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func UserAll(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// userAllHandler
+func userAllHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	tags := []string{"(story,comment,poll)", "author_" + sp.ID}
@@ -141,9 +149,10 @@ func UserAll(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func UserThreads(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// userThreadsHandler
+func userThreadsHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	tags := []string{"comment", "author_" + sp.ID}
@@ -160,9 +169,10 @@ func UserThreads(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func UserSubmitted(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// userSubmittedHandler
+func userSubmittedHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	tags := []string{"(story,poll)", "author_" + sp.ID}
@@ -178,9 +188,10 @@ func UserSubmitted(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Replies(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// repliesHandler
+func repliesHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "comment"
@@ -216,9 +227,10 @@ func Replies(c *gin.Context) {
 	Generate(c, &sp, &op)
 }
 
-func Item(c *gin.Context) {
-	var sp SearchParams
-	var op OutputParams
+// itemHandler
+func itemHandler(c *gin.Context) {
+	var sp searchParams
+	var op outputParams
 	ParseRequest(c, &sp, &op)
 
 	sp.Tags = "comment,story_" + sp.ID

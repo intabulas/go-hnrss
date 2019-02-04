@@ -31,7 +31,7 @@ type RSSItem struct {
 	Permalink   RSSPermalink `xml:"guid"`
 }
 
-func NewRSS(results *AlgoliaSearchResponse, op *OutputParams) *RSS {
+func NewRSS(results *AlgoliaSearchResponse, op *outputParams) *RSS {
 	rss := RSS{
 		Version:       "2.0",
 		NSAtom:        NSAtom,
