@@ -57,9 +57,8 @@ func (hit AlgoliaSearchHit) isSelfPost() bool {
 func (hit AlgoliaSearchHit) GetTitle() string {
 	if hit.isComment() {
 		return fmt.Sprintf("New comment by %s in \"%s\"", hit.Author, html.UnescapeString(hit.StoryTitle))
-	} else {
-		return html.UnescapeString(hit.Title)
 	}
+	return html.UnescapeString(hit.Title)
 }
 
 func (hit AlgoliaSearchHit) GetPermalink() string {
@@ -73,9 +72,9 @@ func (hit AlgoliaSearchHit) GetURL(linkTo string) string {
 
 	if linkTo == "url" && hit.URL != "" {
 		return hit.URL
-	} else {
-		return hit.GetPermalink()
 	}
+	return hit.GetPermalink()
+
 }
 
 func buildTemplateEngine(name string) *template.Template {
@@ -119,15 +118,14 @@ func (hit AlgoliaSearchHit) GetDescription() string {
 func (hit AlgoliaSearchHit) GetCreatedAt() time.Time {
 	if rv, err := time.Parse("2006-01-02T15:04:05.000Z", hit.CreatedAt); err == nil {
 		return rv
-	} else {
-		return UTCNow()
 	}
+	return UTCNow()
 }
 
 func GetResults(params url.Values) (*AlgoliaSearchResponse, error) {
 	resp, err := algoliaClient.Get(algoliaSearchURL + params.Encode())
 	if err != nil {
-		return nil, errors.New("Error getting search results from Algolia")
+		return nil, errors.New("error getting search results from Algolia")
 	}
 	defer resp.Body.Close()
 
@@ -135,7 +133,7 @@ func GetResults(params url.Values) (*AlgoliaSearchResponse, error) {
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&parsed)
 	if err != nil {
-		return nil, errors.New("Invalid JSON received from Algolia")
+		return nil, errors.New("invalid JSON received from Algolia")
 	}
 
 	return &parsed, nil

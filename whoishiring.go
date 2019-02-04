@@ -3,10 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 func HiringCommon(c *gin.Context, query string) {
@@ -25,7 +26,7 @@ func HiringCommon(c *gin.Context, query string) {
 	}
 
 	if len(results.Hits) < 1 {
-		e := errors.New("No whoishiring stories found")
+		e := errors.New("no whoishiring stories found")
 		c.Error(e)
 		c.String(http.StatusBadGateway, e.Error())
 		return

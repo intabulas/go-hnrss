@@ -39,7 +39,7 @@ func NewAtom(results *AlgoliaSearchResponse, op *OutputParams) *Atom {
 		Title:   op.Title,
 		Updated: Timestamp("atom", UTCNow()),
 		Links: []AtomLink{
-			AtomLink{op.SelfLink, "self", "application/atom+xml"},
+			{op.SelfLink, "self", "application/atom+xml"},
 		},
 	}
 
@@ -50,7 +50,7 @@ func NewAtom(results *AlgoliaSearchResponse, op *OutputParams) *Atom {
 			Updated:   Timestamp("atom", hit.GetCreatedAt()),
 			Published: Timestamp("atom", hit.GetCreatedAt()),
 			Links: []AtomLink{
-				AtomLink{hit.GetURL(op.LinkTo), "alternate", ""},
+				{hit.GetURL(op.LinkTo), "alternate", ""},
 			},
 			Author:  hit.Author,
 			Content: AtomContent{"html", hit.GetDescription()},
