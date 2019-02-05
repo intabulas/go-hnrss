@@ -66,7 +66,7 @@ func ParseRequest(c *gin.Context, sp *searchParams, op *outputParams) {
 	op.SelfLink = SiteURL + c.Request.URL.String()
 }
 
-func Generate(c *gin.Context, sp *searchParams, op *outputParams) {
+func renderResults(c *gin.Context, sp *searchParams, op *outputParams) {
 	if op.Format == "" {
 		op.Format = "rss"
 	}
@@ -96,13 +96,10 @@ func Generate(c *gin.Context, sp *searchParams, op *outputParams) {
 
 	switch op.Format {
 	case "rss":
-		rss := NewRSS(results, op)
-		c.XML(http.StatusOK, rss)
+		c.XML(http.StatusOK, resultsAsRSS(results, op))
 	case "atom":
-		atom := NewAtom(results, op)
-		c.XML(http.StatusOK, atom)
+		c.XML(http.StatusOK, resultsAsAtom(results, op))
 	case "jsonfeed":
-		jsonfeed := NewJSONFeed(results, op)
-		c.JSON(http.StatusOK, jsonfeed)
+		c.JSON(http.StatusOK, resultsAsJSONFeed(results, op))
 	}
 }

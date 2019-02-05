@@ -50,7 +50,7 @@ func fetchHiring(c *gin.Context, query string) {
 	op.Title = results.Hits[0].Title
 	op.Link = hackerNewsItemID + results.Hits[0].ObjectID
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // seekingEmployeesHandler ...

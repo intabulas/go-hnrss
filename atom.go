@@ -32,7 +32,7 @@ type AtomLink struct {
 	Type         string `xml:"type,attr,omitempty"`
 }
 
-func NewAtom(results *AlgoliaSearchResponse, op *outputParams) *Atom {
+func resultsAsAtom(results *AlgoliaSearchResponse, op *outputParams) *Atom {
 	atom := Atom{
 		NS:      NSAtom,
 		ID:      op.SelfLink,

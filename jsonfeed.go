@@ -19,7 +19,7 @@ type JSONFeedItem struct {
 	Author      string `json:"author"`
 }
 
-func NewJSONFeed(results *AlgoliaSearchResponse, op *outputParams) *JSONFeed {
+func resultsAsJSONFeed(results *AlgoliaSearchResponse, op *outputParams) *JSONFeed {
 	j := JSONFeed{
 		Version:     "https://jsonfeed.org/version/1",
 		Title:       op.Title,

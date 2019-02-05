@@ -24,7 +24,7 @@ func newestPostHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/newest"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // frontpageHandler
@@ -41,7 +41,7 @@ func frontpageHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // newCommentsHandler
@@ -59,7 +59,7 @@ func newCommentsHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/newcomments"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // askHNHandler
@@ -76,7 +76,7 @@ func askHNHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/ask"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // showHNHandler
@@ -93,7 +93,7 @@ func showHNHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/shownew"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // pollsHandler
@@ -110,7 +110,7 @@ func pollsHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // jobsHandler
@@ -127,7 +127,7 @@ func jobsHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/jobs"
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // userAllHandler
@@ -146,7 +146,7 @@ func userAllHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/user?id=" + sp.ID
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // userThreadsHandler
@@ -166,7 +166,7 @@ func userThreadsHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/threads?id=" + sp.ID
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // userSubmittedHandler
@@ -185,7 +185,7 @@ func userSubmittedHandler(c *gin.Context) {
 	}
 	op.Link = "https://news.ycombinator.com/submitted?id=" + sp.ID
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // repliesHandler
@@ -224,7 +224,7 @@ func repliesHandler(c *gin.Context) {
 		op.Link = "https://news.ycombinator.com/threads?id=" + sp.ID
 	}
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
 
 // itemHandler
@@ -236,9 +236,9 @@ func itemHandler(c *gin.Context) {
 	sp.Tags = "comment,story_" + sp.ID
 	sp.SearchAttributes = "default"
 
-	// op.Title is set inside Generate to avoid the overhead of a
+	// op.Title is set inside renderResults to avoid the overhead of a
 	// separate HTTP request to obtain the title.
 	op.Link = "https://news.ycombinator.com/item?id=" + sp.ID
 
-	Generate(c, &sp, &op)
+	renderResults(c, &sp, &op)
 }
