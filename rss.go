@@ -43,9 +43,10 @@ func NewRSS(results *AlgoliaSearchResponse, op *outputParams) *RSS {
 		Generator:     "go-hnrss " + buildString,
 		LastBuildDate: Timestamp("rss", UTCNow()),
 		AtomLink:      AtomLink{op.SelfLink, "self", "application/rss+xml"},
+		Items:         make([]RSSItem, len(results.Hits)),
 	}
 
-	for _, hit := range results.Hits {
+	for i, hit := range results.Hits {
 		item := RSSItem{
 			Title:       CDATA{hit.GetTitle()},
 			Link:        hit.GetURL(op.LinkTo),
@@ -55,7 +56,7 @@ func NewRSS(results *AlgoliaSearchResponse, op *outputParams) *RSS {
 			Published:   Timestamp("rss", hit.GetCreatedAt()),
 			Permalink:   RSSPermalink{hit.GetPermalink(), "false"},
 		}
-		rss.Items = append(rss.Items, item)
+		rss.Items[i] = item
 	}
 
 	return &rss

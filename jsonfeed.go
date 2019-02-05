@@ -25,8 +25,9 @@ func NewJSONFeed(results *AlgoliaSearchResponse, op *outputParams) *JSONFeed {
 		Title:       op.Title,
 		Link:        op.Link,
 		Description: "Hacker News RSS",
+		Items:       make([]JSONFeedItem, len(results.Hits)),
 	}
-	for _, hit := range results.Hits {
+	for i, hit := range results.Hits {
 		item := JSONFeedItem{
 			ID:          hit.GetPermalink(),
 			Title:       hit.GetTitle(),
@@ -36,7 +37,7 @@ func NewJSONFeed(results *AlgoliaSearchResponse, op *outputParams) *JSONFeed {
 			Published:   Timestamp("jsonfeed", hit.GetCreatedAt()),
 			Author:      hit.Author,
 		}
-		j.Items = append(j.Items, item)
+		j.Items[i] = item
 	}
 	return &j
 }

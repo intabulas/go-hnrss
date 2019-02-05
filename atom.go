@@ -41,9 +41,10 @@ func NewAtom(results *AlgoliaSearchResponse, op *outputParams) *Atom {
 		Links: []AtomLink{
 			{op.SelfLink, "self", "application/atom+xml"},
 		},
+		Entries: make([]AtomEntry, len(results.Hits)),
 	}
 
-	for _, hit := range results.Hits {
+	for i, hit := range results.Hits {
 		entry := AtomEntry{
 			ID:        hit.GetPermalink(),
 			Title:     CDATA{hit.GetTitle()},
@@ -55,7 +56,7 @@ func NewAtom(results *AlgoliaSearchResponse, op *outputParams) *Atom {
 			Author:  hit.Author,
 			Content: AtomContent{"html", hit.GetDescription()},
 		}
-		atom.Entries = append(atom.Entries, entry)
+		atom.Entries[i] = entry
 	}
 
 	return &atom

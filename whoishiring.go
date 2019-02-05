@@ -40,9 +40,9 @@ func fetchHiring(c *gin.Context, query string) {
 	if query != "" {
 		sp.Filters = "parent_id=" + results.Hits[0].ObjectID
 	} else {
-		var filters []string
-		for _, hit := range results.Hits {
-			filters = append(filters, "parent_id="+hit.ObjectID)
+		filters := make([]string, len(results.Hits))
+		for i, hit := range results.Hits {
+			filters[i] = "parent_id=" + hit.ObjectID
 		}
 		sp.Filters = strings.Join(filters, " OR ")
 	}

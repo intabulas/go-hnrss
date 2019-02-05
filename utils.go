@@ -47,9 +47,10 @@ func ParseRequest(c *gin.Context, sp *searchParams, op *outputParams) {
 	if strings.Contains(sp.Query, " OR ") {
 		sp.Query = strings.Replace(sp.Query, " OR ", " ", -1)
 
-		var q []string
-		for _, f := range strings.Fields(sp.Query) {
-			q = append(q, fmt.Sprintf("\"%s\"", f))
+		fields := strings.Fields(sp.Query)
+		q := make([]string, len(fields))
+		for i, f := range fields {
+			q[i] = fmt.Sprintf("\"%s\"", f)
 		}
 		sp.Query = strings.Join(q, " ")
 		sp.OptionalWords = strings.Join(q, " ")
